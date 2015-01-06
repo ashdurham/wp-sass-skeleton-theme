@@ -1,0 +1,338 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass";
+
+/* Mixins */
+
+@mixin mediaquery($point, $ele: min) {
+  @if $point == standard {
+    @media (#{$ele}-width: 1140px) { @content; }
+  }
+  @else if $point == ipad-land {
+    @media (#{$ele}-width: 1024px) { @content; }
+  }
+  @else if $point == ipad-port {
+    @media (#{$ele}-width: 768px) { @content; }
+  }
+  @else if $point == iphone5-land {
+    @media (#{$ele}-width: 568px)  { @content; }
+  }
+  @else if $point == iphone4-land {
+    @media (#{$ele}-width: 480px)  { @content; }
+  }
+  @else if $point == iphone-port {
+    @media (#{$ele}-width: 320px)  { @content; }
+  }
+  @else {
+    @media (#{$ele}-width: $point)  { @content; }
+  }
+}
+
+@mixin retina() {
+    @media screen and (-webkit-min-device-pixel-ratio: 2),
+    screen and (min--moz-device-pixel-ratio: 2) {
+        @content;
+    }
+}
+
+@mixin prefix($property, $value) {
+    -webkit-#{$property}: #{$value};
+    -moz-#{$property}: #{$value};
+    -ms-#{$property}: #{$value};
+    -o-#{$property}: #{$value};
+    #{$property}: #{$value};
+}
+
+@mixin prefix_value($property, $value) {
+    -webkit-#{$property}: -webkit-#{$value};
+    -moz-#{$property}: -moz-#{$value};
+    -ms-#{$property}: -ms-#{$value};
+    -o-#{$property}: -o-#{$value};
+    #{$property}: #{$value};
+}
+
+@mixin opacity($value) {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=#{$value*100})";
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=#{$value*100});
+  filter: alpha(opacity=#{$value*100});
+  -moz-opacity: #{$value};
+  -khtml-opacity: #{$value};
+  opacity: #{$value};
+}
+
+@mixin clear() {
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin fontface($fontname, $filename) {
+    @font-face {
+        font-family: $fontname;
+        src: url('../fonts/#{$filename}.eot');
+        src: url('../fonts/#{$filename}.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/#{$filename}.svg##{fontame}') format('svg'),
+             url('../fonts/#{$filename}.woff') format('woff'),
+             url('../fonts/#{$filename}.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.01);
+    }
+    
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+        @font-face {
+            font-family: $fontname;
+            src: url('../fonts/#{$filename}.svg') format('svg');
+        }
+    }
+}
+
+
+/* ==========================================================================
+   Styles: Mobile-first CSS
+   ========================================================================== */
+
+body {
+    font-size: 16px;
+    line-height: 26px;
+    font-family: Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+        @include mediaquery(standard) {
+            width: 1026px; /* 1140px - 10% for margins */
+            margin: 0 auto;
+        }
+}
+
+.header-container {
+    
+}
+
+.footer-container,
+.main aside {
+    
+}
+
+.header-container,
+.footer-container,
+.main aside {
+    
+}
+
+.title {
+    color: white;
+        @include mediaquery(ipad-port) {
+            float: left;
+            @include prefix(opacity, 0.8);
+        }
+}
+
+nav {
+    @include mediaquery(ipad-port) {
+        float: right;
+        width: 38%;
+    }
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+        @include mediaquery(iphone-land) {
+            float: left;
+            width: 27%;
+            margin: 0 1.7%;
+            padding: 25px 2%;
+            margin-bottom: 0;
+        }
+}
+
+nav a:hover,
+nav a:visited {
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav li:first-child a {
+    @include mediaquery(iphone-land) {
+        margin-left: 0;
+    }
+}
+
+nav li:last-child a {
+    @include mediaquery(iphone-land) {
+        margin-right: 0;
+    }
+}
+
+.main-navigation ul.nav-menu.toggled-on,
+.menu-toggle {
+    display: inline-block;
+        @include mediaquery(iphone-land) {
+            display: none;
+        }
+}
+
+nav ul li {
+    @include mediaquery(iphone-land) {
+        display: inline;
+    }
+}
+
+.oldie nav a {
+    @include mediaquery(iphone-land) {
+        margin: 0 0.7%;
+    }
+}
+
+/* ==============
+    MOBILE: Main
+   ============== */
+
+.main {
+    padding: 30px 0;
+}
+
+.main article {
+    @include mediaquery(ipad-port) {
+        float: left;
+        width: 57%;
+    }
+}
+
+.main article h1 {
+    font-size: 2em;
+}
+
+.main aside {
+    color: white;
+    padding: 0px 5% 10px;
+        @include mediaquery(ipad-port) {
+            float: right;
+            width: 28%;
+        }
+}
+
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+/* ===============
+    ALL: IE Fixes
+   =============== */
+
+.ie7 .title {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   Wordpress stuff
+   ========================================================================== */
+
+/* Assistive text */
+.assistive-text,
+.site .screen-reader-text {
+	position: absolute !important;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+.main-navigation .assistive-text:hover,
+.main-navigation .assistive-text:active,
+.main-navigation .assistive-text:focus {
+	background: #fff;
+	border: 2px solid #333;
+	border-radius: 3px;
+	clip: auto !important;
+	color: #000;
+	display: block;
+	font-size: 12px;
+	padding: 12px;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
