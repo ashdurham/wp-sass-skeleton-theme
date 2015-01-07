@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'js/*.js',
-        '!js/scripts.min.js'
+        '!js/main.min.js'
       ]
     },
     sass: {
@@ -39,7 +39,6 @@ module.exports = function(grunt) {
         files: {
           'js/main.min.js': [
             'js/*.js',
-            'js/vendor/*.js'
           ]
         },
         options: {

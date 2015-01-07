@@ -13,13 +13,13 @@
         <meta name="viewport" content="width=device-width">
         
         <?php
-            wp_enqueue_style('font-awesome', get_template_directory_uri().'/css/font-awesome.min.css', null, '3.2.1', 'screen, projection');
-            wp_enqueue_style('bxslider', get_template_directory_uri().'/css/jquery.bxslider.css', null, '4.1', 'screen, projection');
             wp_enqueue_style('screen', get_template_directory_uri().'/css/screen.css', null, '1.0.0', 'screen, projection');
             wp_enqueue_style('print', get_template_directory_uri().'/css/print.css', null, '1.0.0', 'print');
             
+            wp_enqueue_script('jquery', get_template_directory_uri()."/js/vendor/jquery-1.11.2.min.js", array('jquery'), '1.11.2', true);
             wp_enqueue_script('modernizr', get_template_directory_uri()."/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js", array('jquery'), '2.6.2', true);
-            wp_enqueue_script('bxslider', get_template_directory_uri()."/js/jquery.bxslider.min.js", array('jquery'), '4.1', true);
+            wp_enqueue_script('bxslider', get_template_directory_uri()."/js/vendor/jquery.bxslider.min.js", array('jquery'), '4.1', true);
+            wp_enqueue_script('main', get_template_directory_uri()."/js/main.min.js", array('jquery'), '1.0.0', true);
         ?>
 
         <?php wp_head(); ?>
