@@ -6,11 +6,14 @@
 @import "compass/reset";
 @import "compass";
 
+@import "vendor/_font-awesome.min";
+@import "vendor/_jquery.bxslider";
+
 /* Mixins */
 
 @mixin mediaquery($point, $ele: min) {
   @if $point == standard {
-    @media (#{$ele}-width: 1140px) { @content; }
+    @media (#{$ele}-width: 1140px) { @content }
   }
   @else if $point == ipad-land {
     @media (#{$ele}-width: 1024px) { @content; }
