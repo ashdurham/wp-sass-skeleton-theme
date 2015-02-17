@@ -38,7 +38,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'js/main.min.js': [
-            'js/*.js',
+            'js/_*.js',
           ]
         },
         options: {
