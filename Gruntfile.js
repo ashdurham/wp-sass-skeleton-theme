@@ -12,27 +12,12 @@ module.exports = function(grunt) {
         '!js/main.min.js'
       ]
     },
-    sass: {
-      dist: {
-        options: {
-          style: 'compressed',
-          compass: true,
-          // Source maps are available, but require Sass 3.3.0 to be installed
-          // https://github.com/gruntjs/grunt-contrib-sass#sourcemap
-          sourcemap: 'none'
-        },
-        files: {
-          'css/screen.css': [
-            'sass/screen.scss'
-          ],
-          'css/print.css': [
-            'sass/print.scss'
-          ],
-          'css/ie.css': [
-            'sass/ie.scss'
-          ]
+    compass: {
+        dist: {
+          options: {
+            config: 'config.rb'
+          }
         }
-      }
     },
     uglify: {
       dist: {
@@ -53,13 +38,13 @@ module.exports = function(grunt) {
         files: [
           'sass/*.scss'
         ],
-        tasks: ['sass']
+        tasks: ['compass']
       },
       js: {
         files: [
           '<%= jshint.all %>'
         ],
-        tasks: [ 'uglify']
+        tasks: [ 'uglify', 'compress']
         // 'jshint',
       },
       livereload: {
@@ -70,7 +55,7 @@ module.exports = function(grunt) {
         },
         files: [
           'css/main.min.css',
-          'js/scripts.min.js',
+          'js/main.min.js',
           'page-templates/*.php',
           '*.php'
         ]
@@ -79,8 +64,18 @@ module.exports = function(grunt) {
     clean: {
       dist: [
         'css/main.min.css',
-        'js/scripts.min.js'
+        'js/main.min.js'
       ]
+    },
+    compress: {
+        main: {
+          options: {
+            mode: 'gzip'
+          },
+          files : [
+              {expand: true, src: ['js/main.min.js'], ext: '.js.gz'}
+          ]
+        }
     }
   });
 
@@ -89,14 +84,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   //grunt.loadNpmTasks('grunt-wp-version');
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
-    'sass',
+    'compass',
     'uglify',
+    'compress'
   ]);
   grunt.registerTask('dev', [
     'watch'
