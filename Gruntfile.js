@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'js/main.min.js': [
-            'js/_*.js',
+            'js/*.js',
           ]
         },
         options: {
@@ -38,27 +38,14 @@ module.exports = function(grunt) {
         files: [
           'sass/*.scss'
         ],
-        tasks: ['compass']
+        tasks: ['sass']
       },
       js: {
         files: [
           '<%= jshint.all %>'
         ],
-        tasks: [ 'uglify', 'compress']
+        tasks: [ 'uglify']
         // 'jshint',
-      },
-      livereload: {
-        // Browser live reloading
-        // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
-        options: {
-          livereload: false
-        },
-        files: [
-          'css/main.min.css',
-          'js/main.min.js',
-          'page-templates/*.php',
-          '*.php'
-        ]
       }
     },
     clean: {
@@ -66,16 +53,6 @@ module.exports = function(grunt) {
         'css/main.min.css',
         'js/main.min.js'
       ]
-    },
-    compress: {
-        main: {
-          options: {
-            mode: 'gzip'
-          },
-          files : [
-              {expand: true, src: ['js/main.min.js'], ext: '.js.gz'}
-          ]
-        }
     }
   });
 
@@ -85,7 +62,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-compress');
   //grunt.loadNpmTasks('grunt-wp-version');
 
   // Register tasks
@@ -93,7 +69,6 @@ module.exports = function(grunt) {
     'clean',
     'compass',
     'uglify',
-    'compress'
   ]);
   grunt.registerTask('dev', [
     'watch'
